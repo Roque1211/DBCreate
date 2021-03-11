@@ -1,6 +1,5 @@
 package DAO;
 
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,12 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import Common.Constantes;
 import Views.MainView;
 
@@ -25,7 +18,7 @@ import Views.MainView;
  * En ella están todos los métodos para conectar y crear la BD, 
  * @author Roque Flores Naranjo
  * 
- * @version 27/10/2020-1.0
+ * @version 11/03/2021-1.3
 
  * @see <a href = "https://www.linkedin.com/in/roque-flores-naranjo/" /> Mi LinkEdin :) </a>
 
@@ -34,8 +27,14 @@ import Views.MainView;
 
 public class IniDAO extends Thread {
 	
+	private static final int LINPROGRESSMIN = 3;
+	private static final int LINPROGRESSMAX = 76;
+	private static float  maximo=0;
+
 	// ESTADOS**********************
 	protected MainView mainview=null;
+	private float progreso;
+	private float total;
 
 	
 	public void run() {
@@ -50,6 +49,7 @@ public class IniDAO extends Thread {
     
     /**
      * crea la Base de datos si no existe
+     * @return 
      */
 	protected void creaBD() {
 		// crea la BD si es necesario
@@ -67,11 +67,14 @@ public class IniDAO extends Thread {
             ResultSet rs= stm.executeQuery(strsql);
             // si existe la abre y lo muestra en la view
 			if (rs.next()) {
+				// máximum progressBar
+				maximo=LINPROGRESSMIN;
 				ejecutaSQL("use "+Constantes.dataBaseD);
 				showMsg ("Base de datos "+ Constantes.dataBaseD+" abierta correctamente.");
-
 			} else {
 			// si no existe ejecuta el fichero sql de creación y el de carga de datos.
+				// máximum progressBar
+				maximo=LINPROGRESSMAX;
 				showMsg("La base de datos "+Constantes.dataBaseD+" no existe. Creando Base de datos.");
 				ejecutaSQL("use " + Constantes.dataBaseD);
 				ejecutaSentencias(Constantes.SQLCREATE);
@@ -79,18 +82,15 @@ public class IniDAO extends Thread {
 				ejecutaSentencias(Constantes.SQLCARGA);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
         // change enable on button
-    	JButton button = mainview.getBtComenzar();
-    	button.setEnabled(true);
+    	mainview.getBtComenzar().setEnabled(true);
     	// ends msg
-    	showMsg("Acabado");
-    	// change label
-    	JLabel label = mainview.getLblMensajes();
-    	label.setText("Esperando");
+    	showMsg("Acabado.");
+    	// change progress
+    	mainview.getProgressBar().setString("Esperando - 100%");
 	}
 	
 	/**
@@ -100,27 +100,13 @@ public class IniDAO extends Thread {
 	 */
 	private void showMsg(String string) {
 		//adds msg to list
-		DefaultListModel<String> listModel = mainview.getLsLog();
-		listModel.add(0,string);
-		
-		//change label
-		JLabel label = mainview.getLblMensajes();
-		switch (label.getText().substring(label.getText().length()-1,label.getText().length())) 
-		{
-		case "/":
-			label.setText("Procesando -");
-			break;
-		case "-":
-			label.setText("Procesando \\");
-			break;
-		case "\\":
-			label.setText("Procesando /");
-			break;
-		default:
-			label.setText("Procesando /");
-			break;
-		}
-		
+		mainview.getLsLog().add(0,string);
+
+		// caculate step
+		progreso = 100/maximo;
+		total = total+progreso;
+		mainview.getProgressBar().setValue((int) total);
+		mainview.getProgressBar().setString(mainview.getProgressBar().getValue()+"%");
 	}
 	/**
 	 * Define el objeto connection para conectar con una BD MySQL
@@ -174,13 +160,11 @@ public class IniDAO extends Thread {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	finally {
 			try {
 				lector.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
