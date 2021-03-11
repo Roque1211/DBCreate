@@ -16,6 +16,8 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
@@ -31,14 +33,10 @@ public class MainView {
 
 	public JFrame frame;
 	private JTextField tfTabla;
-
-	private static String CARPETA="C:\\Users\\Roque\\Desktop\\Bettergy\\Salesforce\\csv";
-	private static String CARPETAD="C:\\Users\\Roque\\Desktop\\Bettergy\\Salesforce";
-	private static String FOUT="\\salida.csv";
-	private static boolean primero=true;
-	private final JPanel pnMensaje = new JPanel();
 	private JTextField tfBD;
-	private JList<String> lsLog;
+	
+	private JButton btComenzar;
+	private JLabel lblMensajes;
 	private DefaultListModel<String> listModel;
 
 	/**
@@ -86,7 +84,7 @@ public class MainView {
 		tfTabla.setColumns(10);
 		
 		// botón Comenzar
-		JButton btComenzar = new JButton("Comenzar");
+		btComenzar = new JButton("Comenzar");
 		pnTabla.add(btComenzar);
 		btComenzar.addActionListener (new ActionListener()
 	       {
@@ -99,15 +97,16 @@ public class MainView {
 		JScrollPane scLog = new JScrollPane();
 		frame.getContentPane().add(scLog);
 		
-		lsLog = new JList<String>();
+		JList <String> lsLog = new JList<String>();
 		listModel = new DefaultListModel<String>();
 		lsLog.setModel(listModel);
 		scLog.setViewportView(lsLog);
+		JPanel pnMensaje = new JPanel();
 		FlowLayout fl_pnMensaje = (FlowLayout) pnMensaje.getLayout();
 		fl_pnMensaje.setAlignment(FlowLayout.LEFT);
 		frame.getContentPane().add(pnMensaje);
 		
-		JLabel lblMensajes = new JLabel("Esperando");
+		lblMensajes = new JLabel("Esperando");
 		lblMensajes.setForeground(Color.BLUE);
 		pnMensaje.add(lblMensajes);
 	}
@@ -118,34 +117,41 @@ public class MainView {
 	private ActionListener comenzar() {
 		
 		if (tfTabla.getText().length()>0 && tfBD.getText().length()>0) {
+			// clear list
+			listModel.clear();
+			// strats thread
 			Constantes.defaultTable=tfTabla.getText();
 			Constantes.dataBaseD = tfBD.getText();
+			IniDAO inidao = new IniDAO(this);		
+			inidao.start();
+			// button not enabled
+			btComenzar.setEnabled(false);
+			// label init
+			lblMensajes.setText("Procesando");
 		} else {
 			JOptionPane.showMessageDialog(frame, "Debe rellenar ambos textos", "Error",JOptionPane.ERROR_MESSAGE);
 		}
-
-		IniDAO inidao = new IniDAO(listModel);
-		
-		addListLine ("Acabado.");
 		return null;
 	}
-	
-	
-	/**
-	 * Adds a line to the list results
-	 * @param line
-	 */
-	private void addListLine(String line) {
-		listModel.addElement(line);
-	
-	}
 
 	/**
-	 * get frame de la vista
+	 * getters 
 	 * @return
 	 */
 	public JFrame getFrame() {
 		return frame;
+	}
+
+	public DefaultListModel<String> getLsLog() {
+		return listModel;
+	}
+
+	public JButton getBtComenzar() {
+		return btComenzar;
+	}
+
+	public JLabel getLblMensajes() {
+		return lblMensajes;
 	}
 	
 

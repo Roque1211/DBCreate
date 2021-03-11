@@ -1,5 +1,6 @@
 package DAO;
 
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import Common.Constantes;
@@ -29,24 +32,22 @@ import Views.MainView;
  */
 
 
-public class IniDAO {
+public class IniDAO extends Thread {
 	
 	// ESTADOS**********************
-	protected DefaultListModel<String> lsLog=null;
+	protected MainView mainview=null;
 
-	// COMPORTAMIENTOS *******************
-	public IniDAO(DefaultListModel<String> listModel) {
-		this.lsLog=listModel;
-		iniciar();
-	}
-    /**
-     * inicia el DAO
-     * crea la conexión a BD y el statement
-     */
 	
-    public void iniciar () {
-        creaBD(); 
-    }
+	public void run() {
+		//Thread.sleep(500);
+        creaBD();;
+		// join();
+	}
+	// COMPORTAMIENTOS *******************
+	public IniDAO(MainView mainView) {
+		this.mainview=mainView;
+	}
+    
     /**
      * crea la Base de datos si no existe
      */
@@ -64,12 +65,14 @@ public class IniDAO {
             		+ " WHERE table_name = '" + Constantes.defaultTable+"'"
             		+ " and table_schema='"+Constantes.dataBaseD+"'";
             ResultSet rs= stm.executeQuery(strsql);
-            // si existe la abre y lo saca en la view
+            // si existe la abre y lo muestra en la view
 			if (rs.next()) {
 				ejecutaSQL("use "+Constantes.dataBaseD);
-				lsLog.addElement("Base de datos "+ Constantes.dataBaseD+" abierta correctamente.");
+				showMsg ("Base de datos "+ Constantes.dataBaseD+" abierta correctamente.");
+
 			} else {
 			// si no existe ejecuta el fichero sql de creación y el de carga de datos.
+				showMsg("La base de datos "+Constantes.dataBaseD+" no existe. Creando Base de datos.");
 				ejecutaSQL("use " + Constantes.dataBaseD);
 				ejecutaSentencias(Constantes.SQLCREATE);
 			    // carga los datos Dummies
@@ -79,8 +82,46 @@ public class IniDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        // change enable on button
+    	JButton button = mainview.getBtComenzar();
+    	button.setEnabled(true);
+    	// ends msg
+    	showMsg("Acabado");
+    	// change label
+    	JLabel label = mainview.getLblMensajes();
+    	label.setText("Esperando");
 	}
 	
+	/**
+	 * muestra un mensaje en la lista de la view y 
+	 * refresca el label de mensajes
+	 * @param string
+	 */
+	private void showMsg(String string) {
+		//adds msg to list
+		DefaultListModel<String> listModel = mainview.getLsLog();
+		listModel.add(0,string);
+		
+		//change label
+		JLabel label = mainview.getLblMensajes();
+		switch (label.getText().substring(label.getText().length()-1,label.getText().length())) 
+		{
+		case "/":
+			label.setText("Procesando -");
+			break;
+		case "-":
+			label.setText("Procesando \\");
+			break;
+		case "\\":
+			label.setText("Procesando /");
+			break;
+		default:
+			label.setText("Procesando /");
+			break;
+		}
+		
+	}
 	/**
 	 * Define el objeto connection para conectar con una BD MySQL
 	 * @param cn 
@@ -89,14 +130,12 @@ public class IniDAO {
         try {
            Class.forName(Constantes.CONTROLADOR);
             cn = DriverManager.getConnection(Constantes.URL, Constantes.USUARIO, Constantes.CLAVE);
-            lsLog.addElement("Conexión OK");
-
         } catch (ClassNotFoundException e) {
-            lsLog.addElement("Error al cargar el controlador");
+        	showMsg("Error al cargar el controlador");
             e.printStackTrace();
 
         } catch (SQLException e) {
-            lsLog.addElement("Error en la conexión");
+        	showMsg("Error en la conexión");
             
             e.printStackTrace();
         }	
@@ -162,12 +201,12 @@ public class IniDAO {
 			// ejecuta Statement
             stm= cn.createStatement();
             stm.execute(strSQL);
-            lsLog.addElement( "SQL Ejecutado: " + strSQL);
+            showMsg(strSQL);
             
             
         } catch (SQLException e) {
 			e.printStackTrace();
-            JOptionPane.showMessageDialog(null, strSQL, "Error: "+e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			showMsg("Error: "+e.getMessage());
 			resultado=false;
 		} finally {
 			
@@ -197,9 +236,6 @@ public class IniDAO {
 		}
 		return null;
 	}
-
-
-	
 	
 	//*************** fin
 }
