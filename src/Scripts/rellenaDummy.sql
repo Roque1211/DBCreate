@@ -10,30 +10,30 @@ insert into project(name) values("Proyecto décimo");
 insert into project(name) values("Proyecto undécimo");
 insert into project(name) values("Proyecto duodécimo");
 insert into project(name) values("Proyecto trigésimo");
-insert into project(name) values("Proyecto cuatrigécimo");
+insert into project(name) values("Proyecto cuatrigésimo");
 insert into project(name) values("Proyecto quinquagésimo");
 
-insert into user(nick,pwd,mail,last_login, first_login) values("roque","1234","a_roque.flores.naranjo@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("perico","1234","a_perico@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("antonio","1234","antonio@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("juan","1234","juan@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("patricio","1234","patricio@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("bobesponja","1234","bobesponja@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("calamardo","1234","calamardo.naranjo@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("gary","1234","gary@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("jondoe","1234","jondoe@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("paco","1234","paco@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("curro","1234","curro@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("heidi","1234","heidio@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("marco","1234","marco@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("amedio","1234","amedio@iespablopicasso.es","2019-01-01","2018-02-23");
-insert into user(nick,pwd,mail,last_login, first_login) values("dragon","1234","dragon@iespablopicasso.es","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","roque","1234","Roque","Flores","a_roque.flores.naranjo@iespablopicasso.es","Administrador","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","perico","1234","Perico","Palotes","a_perico@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("D5D233F0-6EC2-4950-8CD7-F44D13EC874F","antonio","1234","Antonio","Píldora","antonio@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("E5D233F0-6EC2-4950-8CD7-F44D13EC874F","juan","1234","Juan","Two","juan@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("F5D233F0-6EC2-4950-8CD7-F44D13EC874F","patricio","1234","Patricio","Estrella","patricio@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("05D233F0-6EC2-4950-8CD7-F44D13EC874F","bob","1234","Bob","Esponja","bobesponja@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("15D233F0-6EC2-4950-8CD7-F44D13EC874F","calamardo","1234","Calamardo","Bocachancla","calamardo.naranjo@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("25D233F0-6EC2-4950-8CD7-F44D13EC874F","gary","1234","Gary","Escupe","gary@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("35D233F0-6EC2-4950-8CD7-F44D13EC874F","jhon","1234","Jhon","Doe","jondoe@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("45D233F0-6EC2-4950-8CD7-F44D13EC874F","paco","1234","Paco","Jones","paco@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("55D233F0-6EC2-4950-8CD7-F44D13EC874F","curro","1234","Curro","Jiménez","curro@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("65D233F0-6EC2-4950-8CD7-F44D13EC874F","heidi","1234","Heidi","Metonto","heidio@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("75D233F0-6EC2-4950-8CD7-F44D13EC874F","marco","1234","Marco","Lepsia","marco@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("85D233F0-6EC2-4950-8CD7-F44D13EC874F","amedio","1234","Amedio","Gas","amedio@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
+insert into user(id,nick,pwd,name,surname,mail,rol,last_login, first_login) values("95D233F0-6EC2-4950-8CD7-F44D13EC874F","Paque","1234","Paque","Temetes","dragon@iespablopicasso.es","Usuario","2019-01-01","2018-02-23");
 
-insert into cabhoras(iduser,datecab) values(1,"2021-03-01");
-insert into cabhoras(iduser,datecab) values(1,"2021-03-02");
-insert into cabhoras(iduser,datecab) values(1,"2021-03-03");
-insert into cabhoras(iduser,datecab) values(1,"2021-03-04");
-insert into cabhoras(iduser,datecab) values(1,"2021-03-05");
+insert into cabhoras(iduser,datecab) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-01");
+insert into cabhoras(iduser,datecab) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-02");
+insert into cabhoras(iduser,datecab) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-03");
+insert into cabhoras(iduser,datecab) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-04");
+insert into cabhoras(iduser,datecab) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-05");
 
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(1,1,"08:00:00", "14:00:00");
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(1,1,"15:00:00", "18:00:00");
@@ -46,11 +46,11 @@ insert into linhoras(idcab,idproject,firsttime,lasttime) values(4,3,"08:00:00", 
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(5,3,"08:00:00", "14:00:00");
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(5,3,"08:00:00", "14:00:00");
 
-insert into cabhoras(iduser,datecab) values(2,"2021-03-01");
-insert into cabhoras(iduser,datecab) values(2,"2021-03-02");
-insert into cabhoras(iduser,datecab) values(2,"2021-03-03");
-insert into cabhoras(iduser,datecab) values(2,"2021-03-04");
-insert into cabhoras(iduser,datecab) values(2,"2021-03-05");
+insert into cabhoras(iduser,datecab) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-01");
+insert into cabhoras(iduser,datecab) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-02");
+insert into cabhoras(iduser,datecab) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-03");
+insert into cabhoras(iduser,datecab) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-04");
+insert into cabhoras(iduser,datecab) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F","2021-03-05");
 
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(6,4,"08:00:00", "14:00:00");
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(6,4,"15:00:00", "18:00:00");
@@ -63,9 +63,9 @@ insert into linhoras(idcab,idproject,firsttime,lasttime) values(9,6,"08:00:00", 
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(9,6,"08:00:00", "14:00:00");
 insert into linhoras(idcab,idproject,firsttime,lasttime) values(10,6,"08:00:00", "14:00:00");
 
-insert into user_project(iduser, idproject) values(1,1);
-insert into user_project(iduser, idproject) values(1,2);
-insert into user_project(iduser, idproject) values(1,3);
-insert into user_project(iduser, idproject) values(2,4);
-insert into user_project(iduser, idproject) values(2,5);
-insert into user_project(iduser, idproject) values(2,6);
+insert into user_project(iduser, idproject) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F",1);
+insert into user_project(iduser, idproject) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F",2);
+insert into user_project(iduser, idproject) values("B5D233F0-6EC2-4950-8CD7-F44D13EC874F",3);
+insert into user_project(iduser, idproject) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F",4);
+insert into user_project(iduser, idproject) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F",5);
+insert into user_project(iduser, idproject) values("C5D233F0-6EC2-4950-8CD7-F44D13EC874F",6);
