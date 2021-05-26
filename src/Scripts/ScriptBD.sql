@@ -1,6 +1,7 @@
 create table if not exists daily(
 	dailyid varchar(36) unique NOT NULL primary key,
-    dailyuser varchar(1024),
+    dailyuser varchar(36),
+    type varchar(1),
 	dailyin datetime,
     dailyout datetime
 );
